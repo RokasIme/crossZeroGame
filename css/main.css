@@ -53,6 +53,14 @@ body {
   padding-top: 1rem;
 }
 
+.start {
+  display: flex;
+  justify-content: center;
+}
+.start-btn {
+  padding: 0.5rem;
+}
+
 .active {
   display: flex;
 }
