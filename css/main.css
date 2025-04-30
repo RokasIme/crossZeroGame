@@ -30,6 +30,8 @@ body {
 
 .btn {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 4rem;
   height: 4rem;
   background-color: #0f4e63;
@@ -37,16 +39,10 @@ body {
 }
 
 .result {
-  display: flex;
+  display: none;
   justify-content: center;
   color: white;
   padding-top: 2rem;
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .choose {
@@ -55,4 +51,12 @@ body {
   align-items: center;
   color: white;
   padding-top: 1rem;
+}
+
+.active {
+  display: flex;
+}
+
+.notactive {
+  display: none;
 }
