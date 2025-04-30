@@ -17,7 +17,10 @@ body {
   font-size: 3rem;
   padding-bottom: 2rem;
 }
-
+.all-buttons-div {
+  display: flex;
+  justify-content: center;
+}
 .all-buttons {
   display: flex;
   justify-content: center;
@@ -34,6 +37,8 @@ body {
 }
 
 .result {
+  display: flex;
+  justify-content: center;
   color: white;
   padding-top: 2rem;
 }
