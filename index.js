@@ -4,29 +4,77 @@ const btnAllEl = document.querySelectorAll(".btn");
 const resultEl = document.querySelector(".result");
 const startEl = document.querySelector(".start-btn");
 
-let usedBtn = [];
-let choosedWeapon;
+let choosedWeapon = "";
+let usedBtnX = [];
+let usedBtnY = [];
+const winningCombinations = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 
-startEl.addEventListener("click", startGame());
+startEl.addEventListener("click", () => {
+  usedBtnX = [];
+  usedBtnY = [];
+  choosedWeapon = "";
+  resultEl.textContent = "";
+  resultEl.classList.remove("active");
+  startGame();
+});
+
+crossEl.addEventListener("click", () => {
+  choosedWeapon = "X";
+});
+
+zeroEl.addEventListener("click", () => {
+  choosedWeapon = "O";
+});
+
+btnAllEl.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    if (btn.innerHTML !== "") {
+      return;
+    }
+
+    if (choosedWeapon === "X") {
+      btn.innerHTML = '<img src="/img/cross.svg" alt="X">';
+      usedBtnX.push(index);
+      choosedWeapon = "O";
+      checkWin();
+      return;
+    }
+    if (choosedWeapon === "O") {
+      btn.innerHTML = '<img src="/img/zero.svg" alt="O">';
+      usedBtnY.push(index);
+      choosedWeapon = "X";
+      checkWin();
+      return;
+    }
+  });
+});
 
 function startGame() {
-  crossEl.addEventListener("click", () => {
-    choosedWeapon = 1;
+  btnAllEl.forEach((btn) => {
+    btn.innerHTML = "";
   });
-  zeroEl.addEventListener("click", () => {
-    choosedWeapon = 0;
-  });
-  console.log(choosedWeapon);
 }
-// btn for each listener  kai paspaudi idėtu į nutton content X arba 0
-// kad astkirti kuris mygtukas gal galima btn index
-// usedBtn[1] = 1;
-// usedBtn[2] = 0;
 
-// butons[(0, 0, 0, 0, 0, 0, 0, 2)];
-
-// [
-//   [0,1,2], [3,4,5], [6,7,8],
-//   [0,3,6], [1,4,7], [2,5,8],
-//   [0,4,8], [2,4,6]
-// ];
+function checkWin() {
+  for (let i = 0; i < winningCombinations.length; i++) {
+    if (winningCombinations[i].every((index) => usedBtnX.includes(index))) {
+      resultEl.classList.add("active");
+      resultEl.textContent = "X is winner";
+      return;
+    }
+    if (winningCombinations[i].every((index) => usedBtnY.includes(index))) {
+      resultEl.classList.add("active");
+      resultEl.textContent = "O is winner";
+      return;
+    }
+  }
+}
